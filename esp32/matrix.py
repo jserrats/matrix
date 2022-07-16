@@ -36,20 +36,27 @@ class Matrix:
         self.write()
 
     def startup_animation(self):
-        for i in range(self.num_leds):
-            self.np[i] = (0, 150, 150)
-            if i % self.width == 0:
-                self.write()
+        for i in range(0, self.height):
+            for ii in range(i):
+                self[i-1-ii, ii] = (0, 100, 100)
+                self[ii, ii - i] = (0, 100, 100)
+                self[32 - (i-1-ii), ii] = (0, 100, 100)
+                self[32 - ii, ii - i] = (0, 100, 100)
+            self.write()
+        self[16, 16] = (0, 100, 100)
+        self[16, 15] = (0, 100, 100)
+        self.write()
+        time.sleep(5)
 
     def startup_animation_finish(self):
-        for i in range(32):
-            self[0, i] = red
-            self[i, 0] = red
-            self[31, i] = red
-            self[i, 31] = red
+        for i in reversed(range(self.height)):
+            for ii in range(i):
+                self[i-1-ii, ii] = (0, 0, 0)
+                self[ii, ii - i] = (0, 0, 0)
+                self[32 - (i-1-ii), ii] = (0, 0, 0)
+                self[32 - ii, ii - i] = (0, 0, 0)
+            self.write()
 
-        self.write()
-        time.sleep(0.5)
         self.clear()
 
     def write(self):
