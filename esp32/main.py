@@ -1,6 +1,7 @@
 from matrix import Matrix
 from wifi import connect
 import socket
+import urequests
 
 print("Welcome")
 
@@ -16,6 +17,7 @@ def udp():
     port = 1234
 
     print(ip)
+    urequests.get("https://djroomba.jserrats.xyz/matrix/print")
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     s.bind((ip, port))
